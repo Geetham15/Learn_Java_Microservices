@@ -23,7 +23,7 @@ public class PlayingWithOptional {
 		System.out.println(optionalf.get());
 		
 		Optional<String> fruit = Optional.of("banana");
-		Optional<String> empty = Optional.empty(); //NoSuchElementException 
+		Optional<String> empty = Optional.empty(); //NoSuchElementException
 
 	}
 

@@ -1,1 +1,14 @@
-/.metadata/
+# Eclipse settings
+.metadata/
+.settings/
+.project
+.classpath
+
+# Java build output
+bin/
+target/
+build/
+*.class
+
+# Sensitive files
+.env

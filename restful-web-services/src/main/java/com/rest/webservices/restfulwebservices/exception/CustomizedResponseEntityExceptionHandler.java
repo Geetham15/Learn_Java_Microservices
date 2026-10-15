@@ -2,8 +2,12 @@ package com.rest.webservices.restfulwebservices.exception;
 
 import java.time.LocalDateTime;
 
+import org.jspecify.annotations.Nullable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
@@ -29,5 +33,13 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 		
 	}
 
+	@Override
+	protected ResponseEntity<Object> handleMethodArgumentNotValid(
+			MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+		ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), 
+				"Total Errors: " + ex.getErrorCount()+ " First Error: "+ex.getFieldError().getDefaultMessage(), request.getDescription(false));
+		return new ResponseEntity(errorDetails, HttpStatus.BAD_REQUEST);
+		// run the post method of user with no name and future birthdate to see the ErrorDetails
+	}
 
 }

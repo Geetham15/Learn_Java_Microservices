@@ -38,7 +38,10 @@ public class UserResource {
 	// GET user by id
 	@GetMapping("/users/{id}")
 	public User retrieveUser(@PathVariable int id) {
-		return service.findOne(id);
+		User user = service.findOne(id);
+		if(user == null)
+			throw new UserNotFoundException("id:" +id);
+		return user;
 	}
 	// Run by command localhost:8080/users/1
 	// { "id": 1, "name": "Adam", "birthDate": "1996-10-15" }

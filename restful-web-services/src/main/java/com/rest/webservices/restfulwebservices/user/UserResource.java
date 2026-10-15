@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,6 +47,13 @@ public class UserResource {
 	// Run by command localhost:8080/users/1
 	// { "id": 1, "name": "Adam", "birthDate": "1996-10-15" }
 
+	// DELETE user by id
+	@DeleteMapping("/users/{id}")
+	public void deleteUser(@PathVariable int id) {
+		service.deleteById(id);
+
+	}
+		
 	// POST /users
 	@PostMapping("/users")
 	public ResponseEntity<User> createUser(@RequestBody User user) {
